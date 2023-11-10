@@ -1,0 +1,51 @@
+body 
+	{	
+		background-color: powderblue; 
+		background-image: url('bg1.jpg');
+		background-repeat: no-repeat;
+  		background-size: cover;
+ }
+	h1, h2, h3, h4, h5, h6   {color: blue;}
+	h1 {text-align: center;}
+	h2 {padding-left: 5px;} 
+	p, pre    {color: blue; padding-left: 8px;}
+	ul {}
+	li {}
+	a {color: skyblue;}
+	a:hover {color: grey;}
+	button 
+	{
+		color: white;
+		background-color: #3FA8EC;
+		border: 2px solid blue;
+	}
+
+
+	#navArea
+	{
+		background-color: rgba(43, 115, 162, 0.8);
+
+		position: absolute;
+		top: 0;
+		left: 0;
+		height: 100%;
+		width: 20%;
+		
+		overflow-y: scroll;
+		
+	}
+
+	#contentArea
+	{
+		background-color: rgba(140, 191, 224, 0.8);
+
+		position: absolute;
+		top: 0;
+		left: 20%;
+		height: 100%;
+		width: 80%;
+
+		overflow-y: scroll;
+	}	
+	.classDiv {}
+	

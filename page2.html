@@ -1,0 +1,295 @@
+
+<!DOCTYPE html>
+<!-- comments -->
+<!--
+HTML:
+Head, body
+h1-h6
+div
+ul/ol/li
+href
+favicon (browser tab icon)
+
+CSS:
+color
+background color/url
+opacity
+hover
+
+JS:
+button
+getByID
+alert()
+prompt()
+
+
+Links:
+(Youtube)
+Net Ninja   https://www.youtube.com/channel/UCW5YeuERMmlnqo4oq8vwUpg
+New Boston  https://www.youtube.com/user/thenewboston/videos
+Derek Banas https://www.youtube.com/watch?v=kDyJN7qQETA
+
+Web Dev reference    https://www.w3schools.com/html/
+Javascript reference https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference
+
+
+-->
+
+<html>
+<head>
+	<title>My Title</title>
+	<link rel="stylesheet" href="stylesheet.css">
+	<link rel="icon" type="image/png" href="icon1.png">
+</head>
+<body>
+<style></style>
+<div>
+	<div id="navArea" class="">
+		<h1>Contents</h1>
+
+		<h2>Pages</h2>
+		<ul>
+			<li id="" class=""><a href="basicwebsite.html"> Page 1: Home</a></li>
+			<li id="" class=""><a href="#"> Page 2: Language</a></li>
+			<li id="" class=""><a href="page3.html">Page 3: About</a></li>
+		</ul>
+
+		<h2>Sections</h2>
+		<ol>
+			<li id="" class=""><a href="#s1"> Section 1: Vocab</a></li>
+			<li id="" class=""><a href="#s2"> Section 2: Flashcards</a></li>
+			<li id="" class=""><a href="#s3"> Section 3: Quizzes</a></li>
+			<li id="" class=""><a href="#s4"> Section 4:</a></li>
+		</ol>
+	</div>
+
+	<div id="contentArea" class="">
+		<h1>Language Learning Page</h1>
+
+		<h2 id="s1">Section 1: Vocab</h2>
+		<button onclick="showVocab()">Show Vocab Words</button>
+		<button onclick="hideVocab()">Hide Vocab Words</button>
+		<p id="vocabArea"></p>
+		
+
+		<h2 id="s2">Section 2: Flashcards</h2>
+		<p>
+		</p>
+
+
+
+		<h2 id="s3">Section 3: Quizes</h2>
+		
+		<button onclick="genRandNum()">Gen Rand Num</button>
+		
+		<p>Q1: What is the spanish word for one</p>
+		<input type="radio" id="q1a1" name="q1" value="a1">
+		<label for="a1">Uno</label><br>
+		<input type="radio" id="q1a2" name="q1" value="a2">
+		<label for="a2">Dos</label><br>
+		<input type="radio" id="q1a3" name="q1" value="a3">
+		<label for="a3">Tres</label>
+
+		<p>Q2: What is the spanish word for two</p>
+		<input type="radio" id="q2a1" name="q2" value="a1">
+		<label for="a1">Uno</label><br>
+		<input type="radio" id="q2a2" name="q2" value="a2">
+		<label for="a2">Dos</label><br>
+		<input type="radio" id="q2a3" name="q2" value="a3">
+		<label for="a3">Tres</label>
+		
+		<p>Q2: What is the spanish word for three</p>
+		<input type="radio" id="q3a1" name="q3" value="a1">
+		<label for="a1">Uno</label><br>
+		<input type="radio" id="q3a2" name="q3" value="a2">
+		<label for="a2">Dos</label><br>
+		<input type="radio" id="q3a3" name="q3" value="a3">
+		<label for="a3">Tres</label>
+
+		<br><br>
+		<button onclick="checkAnswers()">Check Answers</button>
+		
+		
+		<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+		<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+		<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+		<h2 id="s4">Section 4: </h2>
+		<p>
+		</p>
+	</div>
+
+	<div>
+	</div>
+</div>
+<script>
+var vocab = [
+	["zero", "cero"],
+	["one", "uno"],
+	["two", "dos"],
+	["three", "tres"]
+	];
+
+/* Values for elements
+vocab[0][0] == "zero";
+vocab[0][1] == "cero";
+vocab[2][2] == "dos";
+*/
+
+
+var isVocabShown = 0; 
+function showVocab()
+{
+	if (isVocabShown == 0)
+	{
+		isVocabShown++;
+		
+		for (var x = 0, y = 0; x <= vocab.length - 1 ; x++)
+		{
+				document.getElementById("vocabArea").innerHTML += vocab[x][y];
+				document.getElementById("vocabArea").innerHTML += " - ";
+				y++;
+				document.getElementById("vocabArea").innerHTML += vocab[x][y] + "<br>";
+				if (y == 1) //up the value based on num of languages used in array (langs - 1)
+				{
+					y = 0;
+				}
+		}
+	}
+}
+
+function hideVocab()
+{
+	isVocabShown = 0;
+	document.getElementById("vocabArea").innerHTML = "";
+}
+
+
+
+function checkAnswers()
+{
+	var score = 0;
+
+	
+	var a1 = document.getElementById("q1a1").checked;
+	var a2 = document.getElementById("q2a2").checked;
+	var a3 = document.getElementById("q3a3").checked;
+	answers = [a1, a2, a3];
+	
+	//check answer for each question
+	for (var i = 0; i <= 2; i++)
+	{
+		
+		if (answers[i] == true)
+		{
+			score++;
+		}	
+	}
+	
+	//alert("You scored: " + score);
+	confirm("You scored: " + score + "/" + answers.length + "\n\n Try Again?");
+}
+
+
+
+
+
+function genRandNum()
+{ 
+	alert( Math.floor( Math.random() * 11) ); // returns a random integer from 0 to 10);
+}	
+
+
+
+
+
+
+
+
+
+
+
+/*
+*
+*Reference stuff
+*
+
+
+
+
+
+		'<p>Q1: What is the spanish word for {vocabWord[q][0]}</p>\
+		<input type="radio" id="q1a1" name="q{1}" value="a{1}">\
+		<label>Uno</label><br>\
+		<input type="radio" id="q1a2" name="q{1}" value="a{2}">\
+		<label>Dos</label><br>\
+		<input type="radio" id="q1a3" name="q{1}" value="a{3}">\
+		<label>Tres</label>\'
+
+
+<select id="cars">
+		  <option value="a1">1</option>
+		  <option value="a2">2</option>
+		  <option value="a3">3</option>
+		  <option value="a4">4</option>
+</select>
+
+++x
+x += 1
+x = x + 1
+
+//declare variables
+//var a, b, c;
+
+//declare and initialize variables
+//var x = 1, y = 2, z = 3;
+
+//one-dimensional array
+var cars = ["Saab", "Volvo", "BMW"];
+
+//button function
+function test1()
+{
+
+
+	//alert("button clicked");
+	
+	/*
+	a = confirm("confirm y n?");
+	
+	//note the double equals 
+	if (a == 1)
+	{
+		alert("yes/true/ok");
+	}
+	else
+	{
+		alert("no/false/canceled");
+	}
+	
+}
+	//document.getElementById("demo").innerHTML = "Hello JavaScript!";
+	
+	/* comments in here. multi line comment 
+	*/
+	
+	//single line comment
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
