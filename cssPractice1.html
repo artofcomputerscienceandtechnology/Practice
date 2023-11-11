@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title> <link rel="stylesheet" href="cssTemplate.css">
+    <meta charset="UTF-8">
+<style>
+body{
+	background-color: black;
+}
+
+button {
+  background-color: deepblue;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  
+  padding: 20px 60px;
+  border: none;
+  outline: none;
+  position: relative;
+  border-radius: 5px;
+  background: linear-gradient(to right, #00FFA3, #DC1FFF);
+  cursor: pointer;
+  
+  transition: background-color 0.93s;
+	-moz-transition: all 1s ease-in;
+    /* WebKit */
+    -webkit-transition: all 1s ease-in;
+    /* Opera */
+    -o-transition: all 1s ease-in;
+    /* Standard */
+    transition: all 1s ease-in;
+	-webkit-transition: background-color 1000ms linear;
+    -ms-transition: background-color 1000ms linear;
+    transition: background-color 1000ms linear;
+}
+
+button:hover {
+  background-color:  purple;
+    background: linear-gradient(purple, blue);
+	
+}
+
+button::before {
+  content: "";
+  position: absolute;
+  left: 1px;
+  right: 1px;
+  top: 1px;
+  bottom: 1px;
+  border-radius: 4px;
+  background-color: #fff;
+  z-index: -1;
+}
+</style>
+</head>
+<body>
+<div id="headerArea">
+	<a class="" href="home.html">Home</a>
+	<a class="" href="flashcards.html"> Flashcards</a>
+	<a class="" href="practice.html"> Practice</a>
+	<a class="" href="reading.html"> Reading</a>
+</div> <!-- id="headerArea"-->
+
+
+<div id="sideArea">
+	<h2></h2> 
+	<button class="fwBtn" onclick="showFlashcard()">Test Card </button><br>
+	<button class="fwBtn" onclick="autoShowCards()">Auto Play</button><br>
+	<button class="fwBtn" onclick="stopAutoShowCards()">Stop Auto Play</button><br>
+	 
+		
+	
+	
+	</pre>
+</div> <!-- id="sideArea"-->
+
+
+<div id="mainArea" >
+	<h1>Flashcards</h1>
+	
+	<div class="" style="font-size: 35px">
+		<p id="test"></p>
+		<h1 id="kanji">国</h1>
+	 
+		
+		<p id="english">country </p>
+	</div>
+</div> <!-- id="mainArea" -->
+<script></script>
+</body>
