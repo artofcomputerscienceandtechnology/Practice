@@ -1,0 +1,232 @@
+<!doctype html>
+<html>
+<head>
+	<title>Timer Log</title>
+<body style="color:white; background-color:black">
+	<h1>Training Log</h1>
+	
+	<button onclick="copyAll('logSection')">Copy All</button>
+	
+	
+	<div id="logSectionFull">
+		<h2>Study Log</h2>
+		<input type="text" id="taskInput"></input>
+		<button onclick="start()">Start</button>
+		<button onclick="stop()">Stop</button>
+		<div id="logSection"> <!-- empty div to write logs to -->
+		</div>
+	</div>
+	
+	<div id="workoutLogSection">
+		<h2>Workout Log</h2>
+		<button onclick="pickRandomExercise()">Pick Random Exercise</button><br> <!-- generate random exercise to do-->
+		<input type="text" id="exerciseQtyInput" size="3"></input>
+		<input type="text" id="exerciseInput"></input> <!-- for custom exercise input -->
+		<select name="cars" id="commonExercises"> <!-- for common eercises -->
+			<option value=" "></option>
+			<option value="Situps">Situps</option>
+			<option value="Pushups">Pushups</option>
+			<option value="Pullups">Pullups</option>
+			<option value="Curls">Curls</option>
+			<option value="Grips">Grips</option>
+			<option value="Mil Press">Mil Press</option>
+			<option value="Delt Lifts">Delt Lifts</option>
+			<option value="Lateral Lifts">Lateral Lifts</option>
+			<option value="Isos">Isos</option>
+			
+			<option value="Leg Lifts">Leg Lifts</option>
+			<option value="Squats">Squats</option>
+			<option value="Lunges">Lunges</option>
+			<option value="Lunge Holds">Lunge Holds</option>
+			<option value="Side Kicks">Side Kicks</option>
+			
+			<option value="Shadow Boxing">Shadow Boxing</option>
+			
+			<option value=""></option>
+		</select>
+		<button onclick="addSet()">Add set</button>
+	</div>	
+	
+	<div id="nutritionLogSection">
+		<h2>Nutrition Log</h2>
+		<input type="text" id="itemInput"></input>
+		<button onclick="addItem()">Add Item</button>
+		<div id="nutritionLog"></div>
+	</div>
+</body>
+<script>
+var today = new Date();
+var dd = String(today.getDate()).padStart(2, '0');
+var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+var yyyy = today.getFullYear();
+today = mm + '/' + dd + '/' + yyyy;
+
+document.getElementById("logSection").innerHTML += "<br>" + today + "<br><br>";
+let logSection = document.getElementById("logSection").innerHTML;
+
+let resting = false;
+let started = false;
+let setNum = 1;
+let taskInput;
+function start()
+{
+	
+	let taskInput = document.getElementById("taskInput").value;
+	
+	if (document.getElementById("taskInput").value == "")
+	{
+		//highlight to indicate input is required
+		document.getElementById('taskInput').style.backgroundColor = 'red';
+		return;
+	}
+	document.getElementById('taskInput').style.backgroundColor = 'white';
+	
+	//exit function if start already pressed 
+	if (started == true)
+		return;
+	else
+		started = true;
+		
+	if (resting == true)
+		restingStop();
+		
+	//get current input and time, print both to screen
+	document.getElementById("logSection").innerHTML += setNum + ". " + taskInput + " Start Time:" + getTime(); 
+	setNum++;
+}
+
+function stop()
+{
+	if (started != true)
+		return;
+		
+	started = false;
+		
+	//write current time to logSection
+	document.getElementById("logSection").innerHTML += "  Finish Time: " + getTime() + "<br>"; 
+	
+	//clear current input
+	document.getElementById("taskInput").value = "";
+	
+	resting = true;
+	restingStart();
+}
+
+function restingStart()
+{
+	//automatically add resting time information after hitting stop button
+	//add restingStartTime after hitting stopBtn, add restingStopTime after hitting startBtn before logging startTaskTime
+	document.getElementById("logSection").innerHTML += "---Resting Start Time:" + getTime();
+
+	
+}
+
+function restingStop()
+{
+	//automatically add resting time information after hitting stop button
+	//add restingStartTime after hitting stopBtn, add restingStopTime after hitting startBtn before logging startTaskTime
+	document.getElementById("logSection").innerHTML += " Resting Stop Time:" + getTime() + "<br>";
+}
+
+function getDate()
+{
+	var now = new Date();
+	var date = now.getDate() + '-' + now.getMonth() + 1 + '-' + now.getFullYear();
+	return date;
+}
+
+function getTime()
+{
+	let now = new Date();
+	let time = now.getHours() + ":" + now.getMinutes();
+	return time;
+}
+
+
+//Workout log section
+
+let workoutSetNum = 1;
+function addSet()
+{
+	let exerciseQtyInput = document.getElementById("exerciseQtyInput").value;
+	let exerciseInput = document.getElementById("exerciseInput").value;
+	
+	//common exercises dropdown menu option
+	var e = document.getElementById("commonExercises");
+	var value = e.options[e.selectedIndex].value;
+	var text = e.options[e.selectedIndex].text;
+	
+	if (document.getElementById("exerciseInput").value == "" && value == " ")
+	{
+		//highlight to indicate input is required
+		document.getElementById('exerciseInput').style.backgroundColor = 'red';
+		document.getElementById('commonExercises').style.backgroundColor = 'red';
+		return;
+	}
+	document.getElementById("exerciseInput").style.backgroundColor = "white";
+	document.getElementById("commonExercises").style.backgroundColor = "white";
+	
+	document.getElementById("workoutLogSection").innerHTML += "<br>" + workoutSetNum + ". " + exerciseQtyInput + " ";
+	document.getElementById("workoutLogSection").innerHTML += exerciseInput + " " + e.value;
+	
+	workoutSetNum++;
+}
+
+function pickRandomExercise()
+{
+	const exercises = ["Situps", "Pushups", "Pullups", "Curls", "", "" ];
+
+	const random = Math.floor(Math.random() * exercises.length);
+	//alert(exercises[random]);
+	//var e = document.getElementById("commonExercises");
+	//e.value = exercises[random];
+	let e = document.getElementById("commonExercises");
+	e.options[e.selectedIndex].value = exercises[random];
+	e.options[e.selectedIndex].text = exercises[random];
+}
+
+/////////
+////Nutrition Section
+////////
+let itemNum = 1;
+function addItem()
+{
+	let itemInput = document.getElementById("itemInput").value;
+	
+	if (document.getElementById("itemInput").value == "")
+	{
+		//highlight to indicate input is required
+		document.getElementById('itemInput').style.backgroundColor = 'red';
+		return;
+	}
+	document.getElementById('itemInput').style.backgroundColor = 'white';
+	
+	
+		
+	//get current input and time, print both to screen
+	document.getElementById("nutritionLog").innerHTML += itemNum + ". " + "  Time: " + getTime() + " " + itemInput + "<br>"; 
+	itemNum++;
+}
+
+function copyAll(containerid)
+{
+	//copy all logs to clipboard (easy fill in until write-to-file fuctionality)
+	
+	// Create a new textarea element and give it id='temp_element'
+	const textarea = document.createElement('textarea');
+	textarea.id = 'temp_element';
+	// Optional step to make less noise on the page, if any!
+	textarea.style.height = 0;
+	// Now append it to your page somewhere, I chose <body>
+	document.body.appendChild(textarea);
+	// Give our textarea a value of whatever inside the div of id=containerid
+	textarea.value = document.getElementById(containerid).innerText;
+	// Now copy whatever inside the textarea to clipboard
+	const selector = document.querySelector('#temp_element');
+	selector.select();
+	document.execCommand('copy');
+	// Remove the textarea
+	document.body.removeChild(textarea);
+}
+</script>
+</html>
