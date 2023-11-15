@@ -1,0 +1,104 @@
+<html>
+<head>
+	<title>Birdy Game</title>
+	 <style>
+		body{color: white; background-color: #368; background-image: url("bg1.jpg");}
+      * {
+        padding: 0;
+        margin: 0;
+      }
+      canvas {
+        background: #eee;
+        display: block;
+        margin: 0 auto;
+      }
+    </style>
+</head>
+<body>
+	<h1>Birdie Game</h1>
+	<canvas id="myCanvas" width="700" height="500"></canvas>
+<script>
+const canvas = document.getElementById("myCanvas");
+const ctx = canvas.getContext("2d");
+
+let playerX = 350, playerY = 450;
+let currentEnergy = 70; //starting energy level
+let itemX = 100, itemY = 0;
+
+
+function draw() 
+{
+	// drawing code
+	//draw background
+	ctx.beginPath();
+	ctx.rect(0, 0, 700, 500);
+	ctx.fillStyle = "#79d";
+	ctx.fill();
+	ctx.closePath();
+
+	//draw item
+	ctx.beginPath();
+	ctx.arc(itemX, itemY, 20, 0, Math.PI * 2, false);
+	ctx.fillStyle = "green";
+	ctx.fill();
+	ctx.closePath();
+
+	itemY++;
+	if (itemY > 500)
+	{
+		itemY = 0;
+		itemX = itemX + 10;
+		//itemX = random
+	}
+	//draw score
+
+
+	//draw energybar
+	ctx.beginPath();
+	ctx.rect(10, 10, 100, 20);
+	ctx.fillStyle = "#843";
+	ctx.fill();
+	ctx.closePath();
+
+	ctx.beginPath();
+	ctx.rect(10, 10, currentEnergy, 20);
+	ctx.fillStyle = "#394";
+	ctx.fill();
+	ctx.closePath();
+	
+	//draw player
+	ctx.beginPath();
+	ctx.rect(playerX, playerY, 70, 40);
+	ctx.fillStyle = "#ccc";
+	ctx.fill();
+	ctx.closePath();
+	
+	//glow proto
+	
+      ctx.strokeStyle = '#9af';
+      //ctx.lineWidth = 10;
+      ctx.shadowColor = '#adf';
+      ctx.shadowBlur = 40;
+      ctx.shadowOffsetX = 0;
+      ctx.shadowOffsetY = 0;
+      ctx.stroke();
+      ctx.fill();
+	
+}
+setInterval(draw, 10);
+
+window.addEventListener('keydown',this.check,false);
+function check(e) {
+	//alert(e.keyCode);
+	var code = e.keyCode;
+	switch (code) {
+        case 37: playerX -= 10; break; //Left key
+        case 38: alert("Up"); break; //Up key
+        case 39: playerX += 10; break; //Right key
+        case 40: alert("Down"); break; //Down key
+        default: alert(code); //Everything else
+    }
+}
+</script>
+</body>
+</html>
